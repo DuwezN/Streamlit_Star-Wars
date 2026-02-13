@@ -283,4 +283,4 @@ elif st.session_state.get("authentication_status") is False:
 
 # SI RIEN SAISI
 else:
-    st.warning("Veuillez entrer votre username et votre mot de passe.")
+    st.warning("Veuillez entrer l'username et le mot de passe : ObiwanKenobi / Laforce")
