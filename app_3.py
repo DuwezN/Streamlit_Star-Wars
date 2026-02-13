@@ -35,10 +35,64 @@ def add_vote(personnage, camp):
 def load_votes():                                                   # charge les votes depuis le fichier CSV, en s'assurant que le fichier existe d'abord
     init_votes_file()                                               # s'assure que le fichier existe avant de tenter de le charger
     return pd.read_csv(VOTES_FILE)                                  # charge les données du fichier CSV dans un DataFrame pandas et le retourne
-def reset_votes():                                                 # supprime le fichier de votes s'il existe, puis le recrée vide (utilisé pour réinitialiser les votes)
+def reset_votes():                                                  # supprime le fichier de votes s'il existe, puis le recrée vide (utilisé pour réinitialiser les votes)
     if os.path.exists(VOTES_FILE):                                  # vérifie si le fichier de votes existe avant de tenter de le supprimer
         os.remove(VOTES_FILE)                                       # supprime le fichier de votes pour effacer tous les votes enregistrés
     init_votes_file()                                               
+
+# --------------------
+# DONNÉES PERSONNAGES
+# --------------------
+personnages = {
+    "Obiwan Kenobi": {
+        "img": "Images/Obiwan_Kenobi.jpg",
+        "texte": "Obi-Wan Kenobi avance comme une lame calme. Maître Jedi, gardien d’un équilibre fragile, il porte la discipline comme une armure — et la compassion comme une faille assumée."
+    },
+    "Dark Vador": {
+        "img": "Images/DarkVador.jpg",
+        "texte": "Dark Vador ne marche pas : il s’impose. Chaque respiration est un écho du passé. Il a aimé, il a chuté… et dans l’ombre qu’il a embrassée, il cherche encore une rédemption."
+    },
+    "Luke Skywalker": {
+        "img": "Images/Luke_Skywalker.jpg",
+        "texte": "Luke Skywalker est l’étincelle improbable. Un garçon du désert qui refuse d’abandonner. Il prouve qu’un héritage ne définit pas un destin — le choix, oui."
+    },
+    "Yoda": {
+        "img": "Images/Yoda.jpg",
+        "texte": "Yoda parle peu, mais chaque mot pèse. Gardien de la sagesse millénaire, il sait que la Force n’est ni lumière ni obscurité — mais équilibre."
+    },
+    "R2D2": {
+        "img": "Images/R2D2.jpg",
+        "texte": "Petit droïde au courage immense. R2-D2 ne brandit pas de sabre laser, mais sans lui, les héros seraient souvent perdus. Fidèle, ingénieux, indispensable."
+    },
+    "C3PO": {
+        "img": "Images/C3PO.jpg",
+        "texte": "C-3PO connaît six millions de formes de communication… mais peine encore à comprendre le chaos humain. Peureux parfois, loyal toujours."
+    },
+    "Chewbacca": {
+        "img": "Images/Chewbacca.jpg",
+        "texte": "Chewbacca est une force brute guidée par un cœur immense. Derrière chaque rugissement se cache une loyauté inébranlable."
+    },
+    "Han Solo": {
+        "img": "Images/Han_Solo.jpg",
+        "texte": "Han Solo se prétend mercenaire, mais agit en héros. Cynique en façade, noble au fond. Il choisit toujours le bon camp — même quand il prétend le contraire."
+    },
+    "Padmé Amidala": {
+        "img": "Images/Padme_Amidala.jpg",
+        "texte": "Padmé Amidala combat sans sabre laser. Diplomate brillante, elle croit en la République quand tout vacille. Son courage est silencieux, mais décisif."
+    },
+    "Anakin Skywalker": {
+        "img": "Images/Anakin_Skywalker.jpg",
+        "texte": "Anakin Skywalker est la promesse et la tragédie. Puissant au-delà de toute mesure, il cherche à vaincre la peur… et finit par en devenir l’esclave."
+    },
+    "Palpatine": {
+        "img": "Images/Palpatine.jpg",
+        "texte": "Palpatine ne conquiert pas par la force brute, mais par la patience. Stratège de l’ombre, il manipule les événements jusqu’à ce que la galaxie plie."
+    },
+    "Maitre Windu": {
+        "img": "Images/Maitre_Windu.jpg",
+        "texte": "Maître Windu incarne la rigueur absolue. Maîtrisant le Vaapad, il flirte avec l’ombre sans s’y perdre. Une autorité rare, une puissance redoutable."
+    }
+}
 
 # --------------------
 # DONNÉES UTILISATEURS
@@ -126,57 +180,7 @@ if st.session_state.get("authentication_status"):
             "Plongez dans l'univers fascinant de la galaxie lointaine, très lointaine, et explorez les histoires captivantes "
             "de ces personnages légendaires."
         )
-        # Les données des personnages sont stockées dans un dictionnaire, où chaque clé est le nom du personnage et la valeur est un autre dictionnaire contenant l'URL de l'image et le texte descriptif.
-        personnages = {
-            "Obiwan Kenobi": {
-                "img": "Images/Obiwan_Kenobi.jpg",
-                "texte": "Obi-Wan Kenobi avance comme une lame calme. Maître Jedi, gardien d’un équilibre fragile, il porte la discipline comme une armure — et la compassion comme une faille assumée."
-            },
-            "Dark Vador": {
-                "img": "Images/DarkVador.jpg",
-                "texte": "Dark Vador ne marche pas : il s’impose. Chaque respiration est un écho du passé. Il a aimé, il a chuté… et dans l’ombre qu’il a embrassée, il cherche encore une rédemption."
-            },
-            "Luke Skywalker": {
-                "img": "Images/Luke_Skywalker.jpg",
-                "texte": "Luke Skywalker est l’étincelle improbable. Un garçon du désert qui refuse d’abandonner. Il prouve qu’un héritage ne définit pas un destin — le choix, oui."
-            },
-            "Yoda": {
-                "img": "Images/Yoda.jpg",
-                "texte": "Yoda parle peu, mais chaque mot pèse. Gardien de la sagesse millénaire, il sait que la Force n’est ni lumière ni obscurité — mais équilibre."
-            },
-            "R2D2": {
-                "img": "Images/R2D2.jpg",
-                "texte": "Petit droïde au courage immense. R2-D2 ne brandit pas de sabre laser, mais sans lui, les héros seraient souvent perdus. Fidèle, ingénieux, indispensable."
-            },
-            "C3PO": {
-                "img": "Images/C3PO.jpg",
-                "texte": "C-3PO connaît six millions de formes de communication… mais peine encore à comprendre le chaos humain. Peureux parfois, loyal toujours."
-            },
-            "Chewbacca": {
-                "img": "Images/Chewbacca.jpg",
-                "texte": "Chewbacca est une force brute guidée par un cœur immense. Derrière chaque rugissement se cache une loyauté inébranlable."
-            },
-            "Han Solo": {
-                "img": "Images/Han_Solo.jpg",
-                "texte": "Han Solo se prétend mercenaire, mais agit en héros. Cynique en façade, noble au fond. Il choisit toujours le bon camp — même quand il prétend le contraire."
-            },
-            "Padmé Amidala": {
-                "img": "Images/Padme_Amidala.jpg",
-                "texte": "Padmé Amidala combat sans sabre laser. Diplomate brillante, elle croit en la République quand tout vacille. Son courage est silencieux, mais décisif."
-            },
-            "Anakin Skywalker": {
-                "img": "Images/Anakin_Skywalker.jpg",
-                "texte": "Anakin Skywalker est la promesse et la tragédie. Puissant au-delà de toute mesure, il cherche à vaincre la peur… et finit par en devenir l’esclave."
-            },
-            "Palpatine": {
-                "img": "Images/Palpatine.jpg",
-                "texte": "Palpatine ne conquiert pas par la force brute, mais par la patience. Stratège de l’ombre, il manipule les événements jusqu’à ce que la galaxie plie."
-            },
-            "Maitre Windu": {
-                "img": "Images/Maitre_Windu.jpg",
-                "texte": "Maître Windu incarne la rigueur absolue. Maîtrisant le Vaapad, il flirte avec l’ombre sans s’y perdre. Une autorité rare, une puissance redoutable."
-            }
-        }
+        
         # L'utilisateur peut sélectionner un personnage dans une liste déroulante pour voir son image et sa description détaillée.
         choix = st.selectbox("Choisis un personnage", list(personnages.keys()))
         st.subheader(choix)
