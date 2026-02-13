@@ -35,7 +35,7 @@ def add_vote(personnage, camp):
 def load_votes():                                                   # charge les votes depuis le fichier CSV, en s'assurant que le fichier existe d'abord
     init_votes_file()                                               # s'assure que le fichier existe avant de tenter de le charger
     return pd.read_csv(VOTES_FILE)                                  # charge les données du fichier CSV dans un DataFrame pandas et le retourne
- def reset_votes():                                                 # supprime le fichier de votes s'il existe, puis le recrée vide (utilisé pour réinitialiser les votes)
+def reset_votes():                                                 # supprime le fichier de votes s'il existe, puis le recrée vide (utilisé pour réinitialiser les votes)
     if os.path.exists(VOTES_FILE):                                  # vérifie si le fichier de votes existe avant de tenter de le supprimer
         os.remove(VOTES_FILE)                                       # supprime le fichier de votes pour effacer tous les votes enregistrés
     init_votes_file()                                               
